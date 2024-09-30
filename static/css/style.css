@@ -1,0 +1,35 @@
+/* Custom CSS */
+/* Hero Section */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+}
+
+/* About Section */
+#about img {
+    border-radius: 10px;
+}
+
+/* Courses Section */
+.card-img-top {
+    object-fit: cover;
+    height: 200px;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+}
