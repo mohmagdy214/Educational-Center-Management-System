@@ -7,7 +7,7 @@ urlpatterns = [
     path('edit/<student_id>/', edit_student, name='edit_student'),
     path('delete/<student_id>/', delete_student, name='delete_student'),
     path('search/', search_student, name='search_student'),
-    path('profile/<profile_id>', show_profile, name='show_profile'),
+    path('profile/<int:user_id>/', show_profile, name='profile'),
     path('profiles/new', create_profile, name='add_profile'),
     path('profile/edit/<profile_id>', edit_profile, name='edit_profile'),
 ]

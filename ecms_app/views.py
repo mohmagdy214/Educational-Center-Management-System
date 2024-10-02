@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .models import Student, TeacherProfile, Matirial
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Student, TeacherProfile, Material
 from .forms import StudentForm, TeacherProfileForm
 from django.contrib.auth.decorators import login_required
 
@@ -56,9 +56,10 @@ def search_student(request):
 
 
 
-def show_profile(request, profile_id):
-    profile = TeacherProfile.objects.get(id=profile_id)
-    return render(request, 'teacher_profile.html', {'profile':profile})
+@login_required(login_url='/login')
+def show_profile(request, user_id):
+    profile = get_object_or_404(TeacherProfile, teacher_id=user_id) # before this there was not teacher_id got passed so the id gets only 404 not found
+    return render(request, 'teacher_profile.html', {'profile': profile})
 
 
 
@@ -81,7 +82,7 @@ def create_profile(request):
 
 @login_required(login_url='/login')
 def edit_profile(request, profile_id):
-    profile = TeacherProfile.objects.get(id=profile_id)
+    profile = get_object_or_404(TeacherProfile, id=profile_id)
     if request.method == 'POST':
         form = TeacherProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -89,4 +90,4 @@ def edit_profile(request, profile_id):
             return redirect(f'/ecms/profile/{profile_id}')
     else:
         form = TeacherProfileForm(instance=profile)
-    return render(request, 'edit_profile.html', {'profile': profile, 'form':form})
+    return render(request, 'edit_profile.html', {'profile': profile, 'form': form})

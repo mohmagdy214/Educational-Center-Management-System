@@ -8,18 +8,16 @@
           <div class="card">
             <img src="{{post.image.url}}" style="height:650px; width:891px;" class="card-img-top" alt="...">
             <div class="card-body">
-              {% if user == post.teacher %}
+              {% comment %} {% if user == post.teacher %}
               <form method='post'>
                 {% csrf_token %}
                 <button type='submit' class='btn btn-outline-danger mb-1' name='post_delete_id' value="{{post.id}}">Delete</button>
                 <a href="{% url 'blog_edit' post.pk %}" class='btn btn-outline-warning mb-1' name='post_edit_id'>Edit</a>
               </form>
-              {% endif %}
+              {% endif %} {% endcomment %}
               <h5 class="card-title">{{post}}</h5> 
               <p class="card-text">{{post.content|safe|truncatewords:50}}</p>
               <a href="{% url 'blog_detail' post.id %}" class="btn btn-primary">Read More</a>
-              {% if user == post.teacher %}
-              {% endif %}
               <div class='d-flex justify-content-end'><strong>@{{post.teacher}}</strong>
                 <img src="{{data.image.url}}">
               </div>
